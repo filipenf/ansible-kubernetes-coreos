@@ -12,23 +12,23 @@
   when: SETUP_KUBECONFIG_ON_MASTER
 
 - name: set up admin TLS assets
-  copy: 
+  copy:
     src={{LOCAL_SSL_DIR}}/{{item}}
     dest=/home/core/.kube/
     mode=0400
-    owner=core 
+    owner=core
     group=core
   with_items:
   - ca.pem
-  - admin-user.pem
-  - admin-user-key.pem
+  - admin.pem
+  - admin-key.pem
   when: SETUP_KUBECONFIG_ON_MASTER
 
 - name: Create admin kubeconfig
   template:
-    src=admin-kubeconfig.j2 dest=/home/core/.kube/config 
+    src=admin-kubeconfig.j2 dest=/home/core/.kube/config
     mode=0400
-    owner=core 
+    owner=core
     group=core
   when: SETUP_KUBECONFIG_ON_MASTER
 
